@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <title>Ending words</title>
+</head>
+<body>
+    <div class="transition">
+        <div class="transition-row row-1">
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+        </div>
+        <div class="transition-row row-2">
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+        </div>
+    </div>
+    <div class="questionHolder">
+        <p style="color: #ee8090; font-size: 18px; margin-bottom: 20px;"></p>
+        <video width="640" height="480" controls class="video">
+            <source src="vid/myvid.mp4" type="video/mp4">
+        </video>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const ease = "power4.inOut";
+
+            // Initial page reveal animation
+            revealTransition().then(() => {
+                gsap.set(".block", { visibility: "hidden" });
+            });
+
+            function revealTransition() {
+                return new Promise((resolve) => {
+                    gsap.set(".block", {scaleY: 1});
+                    gsap.to(".block", {
+                        scaleY: 0,
+                        duration: 1,
+                        stagger: {
+                            each: 0.1,
+                            from: "start",
+                            grid: "auto",
+                            axis: "x",
+                        },
+                        ease: ease,
+                        onComplete: resolve,
+                    });
+                });
+            }
+
+            function animateTransition() {
+                return new Promise((resolve) => {
+                    gsap.set(".block", { visibility: "visible", scaleY: 0});
+                    gsap.to(".block", {
+                        scaleY: 1,
+                        duration: 1,
+                        stagger: {
+                            each: 0.1,
+                            from: "start",
+                            grid: [2,5],
+                            axis: "x",
+                        },
+                        ease: ease,
+                        onComplete: resolve,
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
